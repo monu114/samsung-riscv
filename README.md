@@ -472,22 +472,68 @@ gtkwave iiitb_rv32i.vcd
 ![image](https://github.com/user-attachments/assets/6e3d4a0a-baf4-44a7-b638-383239e5ee1d)
 
 ### Signal Analysis
-The waveform includes the following key signals:
+Instruction 1: ADD R6, R2, R1 
 
-clk: The clock signal driving the design.
+![VirtualBox_vdsworkshop_03_02_2025_19_32_43](https://github.com/user-attachments/assets/4dabab4c-ee6a-42d0-ba4f-5af076e7c9ee)
 
-NPC [31:0]: The next program counter value.
+---
 
-WB_OUT [31:0]: The write-back output signal.
+Instruction 2: SUB R7, R1, R2
 
-RN: A register or control signal (usage depends on your design).
+![VirtualBox_vdsworkshop_03_02_2025_19_34_13](https://github.com/user-attachments/assets/f6df1f47-829b-41e7-baf9-7039a116425e)
 
-#### Observations from the Waveform
+---
 
-The clk signal toggles periodically to synchronize the design.
+Instruction 3: AND R8, R1, R3
 
-The NPC value increments, indicating instruction execution.
+![VirtualBox_vdsworkshop_03_02_2025_19_35_54](https://github.com/user-attachments/assets/71340e1f-7abc-49a8-8877-7bcb861f5b29)
 
-The WB_OUT signal changes at specific intervals, corresponding to write-back operations.
+---
 
-The RN signal may represent a register value or an internal control flag.
+Instruction 4: OR R9, R2, R5
+
+![VirtualBox_vdsworkshop_03_02_2025_19_36_55](https://github.com/user-attachments/assets/c4cd1c52-4895-4fce-9c40-f32f600794b7)
+
+---
+
+Instruction 5: XOR R10, R1, R4
+
+![VirtualBox_vdsworkshop_03_02_2025_19_39_38](https://github.com/user-attachments/assets/d1202e87-d9b7-4890-b943-8a479b18cdcc)
+
+---
+
+Instruction 6: SLT R1, R2, R4
+
+![VirtualBox_vdsworkshop_03_02_2025_19_40_14](https://github.com/user-attachments/assets/249d7109-25df-46ff-bd65-cbe9d837e915)
+
+---
+
+Instruction 7: ADDI R12, R4, 5
+
+![VirtualBox_vdsworkshop_03_02_2025_19_43_32](https://github.com/user-attachments/assets/27f5f1e1-6d4f-4d20-9c49-2f7d624f5cf5)
+
+---
+
+Instruction 8: BEQ R0, R0, 15
+
+![VirtualBox_vdsworkshop_03_02_2025_19_49_59](https://github.com/user-attachments/assets/a4ac6de4-3744-42da-a8f4-89814867c7f1)
+
+---
+
+Instruction 9:sw r3,r1,2
+
+![VirtualBox_vdsworkshop_03_02_2025_20_17_08](https://github.com/user-attachments/assets/38bb8f76-c631-4485-86c9-d512f7d70039)
+
+---
+
+Instruction 10:lw r13,r1,2
+
+![VirtualBox_vdsworkshop_03_02_2025_19_54_24](https://github.com/user-attachments/assets/829be81f-d76c-4d03-b815-683f23a9f78d)
+
+---
+
+Full 5-stage instruction pipeline and pc-increment description Waveform is given below:
+
+![VirtualBox_vdsworkshop_03_02_2025_19_57_19](https://github.com/user-attachments/assets/abc1afa2-2cfe-4d47-b8c8-37ef74456910)
+
+</details>
