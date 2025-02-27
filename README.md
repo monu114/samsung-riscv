@@ -579,5 +579,75 @@ This project demonstrates how to interface an IR sensor with the CH32V00X microc
 - Industrial automation
 
 This setup is simple yet effective for various embedded system projects where object detection is required. By modifying the code, additional functionalities such as buzzer alerts or motor control can be integrated.
+</details>
+
+<details>
+   <summary><b>Task 6:</b> Implement an Automatic Light System using the CH32V00X Microcontroller</summary>
+<br>
+
+## Overview:
+This project demonstrates how to use an IR sensor with the CH32V00X microcontroller to control an LED. The system automatically turns the LED on or off based on the sensor's input, making it suitable for automation applications such as automatic lighting systems and object detection.
+
+## Code Implementation:
+```c
+#include <ch32v00x.h>
+#include <debug.h>
+
+void GPIO_Config(void) {
+    GPIO_InitTypeDef GPIO_InitStructure = {0};
+    RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOD, ENABLE);
+    
+    GPIO_InitStructure.GPIO_Pin = GPIO_Pin_4;
+    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IPU;
+    GPIO_Init(GPIOD, &GPIO_InitStructure);
+    
+    GPIO_InitStructure.GPIO_Pin = GPIO_Pin_6;
+    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
+    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+    GPIO_Init(GPIOD, &GPIO_InitStructure);
+}
+
+int main(void) {
+    uint8_t IR = 0;
+    uint8_t set = 1;
+    uint8_t reset = 0;
+    
+    NVIC_PriorityGroupConfig(NVIC_PriorityGroup_1);
+    SystemCoreClockUpdate();
+    Delay_Init();
+    GPIO_Config();
+    
+    while(1) {
+        IR = GPIO_ReadInputDataBit(GPIOD, GPIO_Pin_4);
+        if (IR == 1) {
+            GPIO_WriteBit(GPIOD, GPIO_Pin_6, reset);
+        } else {
+            GPIO_WriteBit(GPIOD, GPIO_Pin_6, set);
+        }
+        Delay_Ms(100);
+    }
+}
+```
+
+## Explanation of Code:
+1. **Header Files**: The necessary header files `<ch32v00x.h>` and `<debug.h>` are included for microcontroller functionality and debugging.
+2. **GPIO Configuration**:
+   - `RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOD, ENABLE);` enables the clock for GPIO port D.
+   - Pin 4 is configured as an input pull-up (`GPIO_Mode_IPU`) to read the IR sensor data.
+   - Pin 6 is configured as a push-pull output (`GPIO_Mode_Out_PP`) to control the LED.
+   - `GPIO_Speed_50MHz` sets the speed for the output pin.
+3. **Main Function**:
+   - `SystemCoreClockUpdate();` updates the system core clock.
+   - `Delay_Init();` initializes the delay function.
+   - `GPIO_Config();` configures the GPIO pins.
+   - Inside the `while(1)` loop:
+     - The microcontroller reads the state of the IR sensor from pin 4 (`GPIO_ReadInputDataBit`).
+     - If an obstacle is detected (IR sensor output is LOW), the LED is turned ON (`GPIO_WriteBit(GPIOD, GPIO_Pin_6, set);`).
+     - Otherwise, the LED is turned OFF (`GPIO_WriteBit(GPIOD, GPIO_Pin_6, reset);`).
+     - A small delay (`Delay_Ms(100);`) is added to prevent rapid switching.
+
+This implementation ensures the LED responds to the IR sensor in real time, enabling an automatic light system based on object detection.
+
+</details>
 
 
